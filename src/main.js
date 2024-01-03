@@ -18,12 +18,11 @@ class Tree {
   /** @param {Array<number>} array  */
   constructor(array) {
     this.root = this.#buildTree(array);
-    this.subtree = undefined;
   }
 
   /**
    * @param {Array<number>} array
-   * @returns {BSTNode}  */
+   * @returns {BSTNode | null}  */
   #buildTree(array) {
     /**
      * @param {number} a
@@ -34,19 +33,7 @@ class Tree {
     const sortedArray = array.sort(compareFunction);
     const uniqueArray = [...new Set(sortedArray)];
 
-    const rootNode = this.#buildRootNode(uniqueArray);
-    this.subtree = this.#buildSubTree(uniqueArray);
-
-    return rootNode;
-  }
-
-  /**
-   * @param {Array<number>} array
-   * @returns {BSTNode}
-   */
-  #buildRootNode(array) {
-    const rootNodeIndex = Math.floor(array.length / 2);
-    const rootNode = new BSTNode(array[rootNodeIndex]);
+    const rootNode = this.#buildSubTree(uniqueArray);
 
     return rootNode;
   }
@@ -68,7 +55,24 @@ class Tree {
 
     return rootNode;
   }
+
+  prettyPrint(node, prefix = "", isLeft = true) {
+    if (node === null) {
+      return;
+    }
+    if (node.right !== null) {
+      this.prettyPrint(
+        node.right,
+        `${prefix}${isLeft ? "│   " : "    "}`,
+        false
+      );
+    }
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
+    if (node.left !== null) {
+      this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+    }
+  }
 }
 
 const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-console.log(myTree.subtree);
+myTree.prettyPrint(myTree.root);
