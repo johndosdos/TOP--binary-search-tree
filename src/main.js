@@ -5,7 +5,7 @@ class BSTNode {
    * @param {number} value
    *  */
   constructor(value) {
-    /** @type {value | null} */
+    /** @type {value} */
     this.value = value;
     /** @type {BSTNode | null} */
     this.left = null;
@@ -56,6 +56,47 @@ class Tree {
     return rootNode;
   }
 
+  /** @param {number} value  */
+  insert(value) {}
+
+  /** @param {number} value  */
+  delete(value) {}
+
+  /**
+   * @param {number} value
+   * @returns {BSTNode | null}   */
+  find(value, root = this.root) {
+    const node = root;
+
+    if (node?.value) {
+      if (value === node.value) {
+        return node;
+      } else if (value < node.value) {
+        return this.find(value, node.left);
+      } else if (value > node.value) {
+        return this.find(value, node.right);
+      }
+    }
+
+    return null;
+  }
+
+  levelOrder() {}
+
+  preOrder() {}
+
+  inOrder() {}
+
+  postOrder() {}
+
+  height() {}
+
+  depth() {}
+
+  isBalanced() {}
+
+  rebalance() {}
+
   prettyPrint(node, prefix = "", isLeft = true) {
     if (node === null) {
       return;
@@ -75,4 +116,5 @@ class Tree {
 }
 
 const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-myTree.prettyPrint(myTree.root);
+// myTree.prettyPrint(myTree.root);
+console.log(myTree.find(1));
