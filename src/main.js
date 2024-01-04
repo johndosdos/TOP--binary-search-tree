@@ -55,8 +55,28 @@ class Tree {
     return rootNode;
   }
 
-  /** @param {number} value  */
-  insert(value) {}
+  /**
+   * @param {number} value
+   * @returns {BSTNode | null}  */
+  insert(value, root = this.root) {
+    if (root && root.value) {
+      if (value === root.value) {
+        return null;
+      } else if (value < root.value) {
+        root.left = this.insert(value, root.left);
+        return root.left;
+      } else if (value > root.value) {
+        root.right = this.insert(value, root.right);
+        return root.right;
+      }
+    }
+
+    const node = new BSTNode(value);
+    if (node?.value) {
+      root = node;
+    }
+    return node;
+  }
 
   /** @param {number} value  */
   delete(value) {}
