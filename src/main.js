@@ -64,10 +64,10 @@ class Tree {
         return null;
       } else if (value < root.value) {
         root.left = this.insert(value, root.left);
-        return root.left;
+        return root;
       } else if (value > root.value) {
         root.right = this.insert(value, root.right);
-        return root.right;
+        return root;
       }
     }
 
@@ -75,7 +75,7 @@ class Tree {
     if (node?.value) {
       root = node;
     }
-    return node;
+    return root;
   }
 
   /** @param {number} value  */
@@ -146,6 +146,6 @@ randomNumber;
 
 const myTree = new Tree([14, 98, 56, 68, 63, 18, 60, 73, 49, 97]);
 myTree.prettyPrint(myTree.root);
-console.log(myTree.insert(2));
+myTree.insert(2);
 myTree.prettyPrint(myTree.root);
 // console.log(myTree.find(18));
