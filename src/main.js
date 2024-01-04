@@ -38,20 +38,19 @@ class Tree {
     return rootNode;
   }
 
-  /** @param {Array<number>} array */
-  #buildSubTree(array) {
-    if (array.length === 0) {
-      return null;
-    }
+  /**
+   * @param {Array<number>} array
+   * @param {number} start
+   * @param {number} end
+   * @returns {BSTNode | null} */
+  #buildSubTree(array, start = 0, end = array.length - 1) {
+    if (start > end) return null;
 
-    const rootNodeIndex = Math.floor(array.length / 2);
+    const rootNodeIndex = Math.floor((start + end) / 2);
     const rootNode = new BSTNode(array[rootNodeIndex]);
 
-    const leftArray = array.slice(0, rootNodeIndex);
-    const rightArray = array.slice(rootNodeIndex + 1, array.length);
-
-    rootNode.left = this.#buildSubTree(leftArray);
-    rootNode.right = this.#buildSubTree(rightArray);
+    rootNode.left = this.#buildSubTree(array, start, rootNodeIndex - 1);
+    rootNode.right = this.#buildSubTree(array, rootNodeIndex + 1, end);
 
     return rootNode;
   }
