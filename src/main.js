@@ -116,6 +116,9 @@ class Tree {
 
   rebalance() {}
 
+  /**
+   * @param {BSTNode | null} node
+   */
   prettyPrint(node, prefix = "", isLeft = true) {
     if (node === null) {
       return;
