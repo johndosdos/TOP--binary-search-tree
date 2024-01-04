@@ -137,6 +137,15 @@ class Tree {
   }
 }
 
-const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-// myTree.prettyPrint(myTree.root);
-console.log(myTree.find(1));
+function generateRandomNumber(size) {
+  return Array.from({ length: size }, () => Math.floor(Math.random() * 100));
+}
+
+const randomNumber = generateRandomNumber(10);
+randomNumber;
+
+const myTree = new Tree([14, 98, 56, 68, 63, 18, 60, 73, 49, 97]);
+myTree.prettyPrint(myTree.root);
+console.log(myTree.insert(2));
+myTree.prettyPrint(myTree.root);
+// console.log(myTree.find(18));
