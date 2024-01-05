@@ -167,4 +167,6 @@ const myTree = new Tree([14, 98, 56, 68, 63, 18, 60, 73, 49, 97]);
 myTree.prettyPrint(myTree.root);
 myTree.insert(2);
 myTree.prettyPrint(myTree.root);
-// console.log(myTree.find(18));
+myTree.delete(2);
+myTree.prettyPrint(myTree.root);
+// myTree.delete(3);
