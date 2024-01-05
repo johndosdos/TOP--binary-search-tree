@@ -80,8 +80,25 @@ class Tree {
     return root;
   }
 
-  /** @param {number} value  */
-  delete(value) {}
+  /**
+   * @param {number} value
+   * @param {BSTNode | null} root */
+  delete(value, root = this.root) {
+    if (root) {
+      if (value === root.value) {
+        console.log(`\n\nDELETE: Success!\n\n`);
+        return null;
+      } else if (value < root.value) {
+        root.left = this.delete(value, root.left);
+        return root;
+      } else if (value > root.value) {
+        root.right = this.delete(value, root.right);
+        return root;
+      }
+    }
+    console.log(`\n\nCANNOT DELETE: Value is not found in the tree.\n\n`);
+    return root;
+  }
 
   /**
    * @param {number} value
