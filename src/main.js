@@ -56,6 +56,17 @@ class Tree {
   }
 
   /**
+   * @param {BSTNode} node
+   * @returns {BSTNode}
+   */
+  #findSuccessorNode(node) {
+    if (node.left) {
+      return this.#findSuccessorNode(node.left);
+    }
+    return node;
+  }
+
+  /**
    * @param {number} value
    * @returns {BSTNode | null}  */
   insert(value, root = this.root) {
@@ -82,9 +93,40 @@ class Tree {
 
   /**
    * @param {number} value
-   * @param {BSTNode | null} root */
+   * @param {BSTNode | null} root
+   * @returns {BSTNode | null} */
   delete(value, root = this.root) {
-    if (root) {
+    if (root && root.value) {
+      //
+      //Case 1: node has two children
+      if (value === root.value && root.left && root.right) {
+        //Case 1.a: right node has leftmost leaf node
+        const successorNode = this.#findSuccessorNode(root.right);
+        root.value = successorNode.value;
+
+        //Case 1.b: right node has no children
+        if (successorNode === root.right) {
+          root.right = this.delete(successorNode.value, root.right);
+        } else {
+          this.delete(successorNode.value, root.right);
+        }
+
+        return root;
+      }
+
+      //Case 2: node has one child
+      if (value === root.value && (root.left || root.right)) {
+        console.log(`\n\nDELETE: Success!\n\n`);
+        return root.left || root.right;
+      } else if (value < root.value) {
+        root.left = this.delete(value, root.left);
+        return root;
+      } else if (value > root.value) {
+        root.right = this.delete(value, root.right);
+        return root;
+      }
+
+      //Case 3: node has no children
       if (value === root.value) {
         console.log(`\n\nDELETE: Success!\n\n`);
         return null;
