@@ -61,6 +61,7 @@ class Tree {
   insert(value, root = this.root) {
     if (root && root.value) {
       if (value === root.value) {
+        console.log(`\n\nINSERT: Failed! Duplicate value found.\n\n`);
         return null;
       } else if (value < root.value) {
         root.left = this.insert(value, root.left);
@@ -75,6 +76,7 @@ class Tree {
     if (node?.value) {
       root = node;
     }
+    console.log(`\n\nINSERT: Success!\n\n`);
     return root;
   }
 
