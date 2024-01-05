@@ -138,6 +138,7 @@ class Tree {
         return root;
       }
     }
+
     console.log(`\n\nCANNOT DELETE: Value is not found in the tree.\n\n`);
     return root;
   }
@@ -206,9 +207,15 @@ const randomNumber = generateRandomNumber(10);
 randomNumber;
 
 const myTree = new Tree([14, 98, 56, 68, 63, 18, 60, 73, 49, 97]);
+myTree.insert(40);
+myTree.insert(51);
+myTree.insert(50);
+myTree.insert(57);
+myTree.insert(52);
 myTree.prettyPrint(myTree.root);
-myTree.insert(2);
+myTree.delete(49);
 myTree.prettyPrint(myTree.root);
-myTree.delete(2);
+myTree.delete(50);
 myTree.prettyPrint(myTree.root);
-// myTree.delete(3);
+myTree.delete(51);
+myTree.prettyPrint(myTree.root);
