@@ -198,7 +198,6 @@ class Tree {
     }
 
     resultArray.push(currentNode?.value);
-
     this.preOrder(currentNode?.left, resultArray);
     this.preOrder(currentNode?.right, resultArray);
 
