@@ -253,5 +253,5 @@ const myTree = new Tree([14, 98, 56, 68, 63, 18, 60, 73, 49, 97]);
 // myTree.insert(57);
 // myTree.insert(52);
 myTree.prettyPrint(myTree.root);
-// myTree.levelOrder(myTree.root);
-console.log(myTree.preOrder(myTree.root));
+myTree.levelOrder(myTree.root);
+// console.log(myTree.preOrder(myTree.root));
