@@ -162,7 +162,29 @@ class Tree {
     return null;
   }
 
-  levelOrder() {}
+  /**
+   * @param {BSTNode | null} node
+   * @returns {Array<number | undefined>}
+   */
+  levelOrder(node) {
+    let currentNode = node;
+    const queue = [];
+    const resultArray = [];
+
+    queue.push(currentNode);
+
+    while (queue.length) {
+      if (currentNode?.left) queue.push(currentNode?.left);
+      if (currentNode?.right) queue.push(currentNode?.right);
+
+      const result = queue.shift();
+      resultArray.push(result?.value);
+      currentNode = queue[0];
+    }
+
+    console.log(`\n\nLevel-order sorting: [${resultArray}]`);
+    return resultArray;
+  }
 
   preOrder() {}
 
@@ -207,15 +229,10 @@ const randomNumber = generateRandomNumber(10);
 randomNumber;
 
 const myTree = new Tree([14, 98, 56, 68, 63, 18, 60, 73, 49, 97]);
-myTree.insert(40);
-myTree.insert(51);
-myTree.insert(50);
-myTree.insert(57);
-myTree.insert(52);
+// myTree.insert(40);
+// myTree.insert(51);
+// myTree.insert(50);
+// myTree.insert(57);
+// myTree.insert(52);
 myTree.prettyPrint(myTree.root);
-myTree.delete(49);
-myTree.prettyPrint(myTree.root);
-myTree.delete(50);
-myTree.prettyPrint(myTree.root);
-myTree.delete(51);
-myTree.prettyPrint(myTree.root);
+myTree.levelOrder(myTree.root);
