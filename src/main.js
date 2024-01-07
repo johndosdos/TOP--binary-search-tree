@@ -217,9 +217,9 @@ class Tree {
       return resultArray;
     }
 
-    this.preOrder(currentNode?.left, resultArray);
+    this.inOrder(currentNode?.left, resultArray);
     resultArray.push(currentNode?.value);
-    this.preOrder(currentNode?.right, resultArray);
+    this.inOrder(currentNode?.right, resultArray);
 
     return resultArray;
   }
@@ -288,5 +288,5 @@ const myTree = new Tree([14, 98, 56, 68, 63, 18, 60, 73, 49, 97]);
 myTree.prettyPrint(myTree.root);
 // console.log(myTree.levelOrder(myTree.root));
 // console.log(myTree.preOrder(myTree.root));
-// console.log(myTree.inOrder(myTree.root));
+console.log(myTree.inOrder(myTree.root));
 console.log(myTree.postOrder(myTree.root));
