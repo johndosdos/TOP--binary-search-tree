@@ -205,7 +205,24 @@ class Tree {
     return resultArray;
   }
 
-  inOrder() {}
+  /**
+   * @param {BSTNode | null | undefined} node
+   * @param {Array<number | undefined>} resultArray
+   * @returns {Array<number | undefined>}
+   */
+  inOrder(node, resultArray = []) {
+    let currentNode = node;
+
+    if (!currentNode) {
+      return resultArray;
+    }
+
+    this.preOrder(currentNode?.left, resultArray);
+    resultArray.push(currentNode?.value);
+    this.preOrder(currentNode?.right, resultArray);
+
+    return resultArray;
+  }
 
   postOrder() {}
 
@@ -252,5 +269,6 @@ const myTree = new Tree([14, 98, 56, 68, 63, 18, 60, 73, 49, 97]);
 // myTree.insert(57);
 // myTree.insert(52);
 myTree.prettyPrint(myTree.root);
-console.log(myTree.levelOrder(myTree.root));
-// console.log(myTree.preOrder(myTree.root));
+// console.log(myTree.levelOrder(myTree.root));
+console.log(myTree.preOrder(myTree.root));
+console.log(myTree.inOrder(myTree.root));
