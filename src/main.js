@@ -281,7 +281,26 @@ class Tree {
     return -1;
   }
 
-  depth() {}
+  /**
+   * @param {number} nodeValue
+   * @param {BSTNode | null} root
+   * @returns {number}
+   */
+  depth(nodeValue, root = this.root, depthOfNode = 0) {
+    if (nodeValue === root?.value) {
+      return depthOfNode;
+    }
+
+    if (root) {
+      if (nodeValue < root.value) {
+        return this.depth(nodeValue, root.left, depthOfNode + 1);
+      } else {
+        return this.depth(nodeValue, root.right, depthOfNode + 1);
+      }
+    }
+
+    return -1;
+  }
 
   isBalanced() {}
 
@@ -326,4 +345,5 @@ myTree.prettyPrint(myTree.root);
 // console.log(myTree.preOrder(myTree.root));
 // console.log(myTree.inOrder(myTree.root));
 // console.log(myTree.postOrder(myTree.root));
-console.log(myTree.height(73));
+// console.log(myTree.height(73));
+console.log(myTree.depth(98));
