@@ -20,6 +20,7 @@ class Tree {
     this.root = this.#buildTree(array);
   }
 
+  //PRIVATE
   /**
    * @param {Array<number>} array
    * @returns {BSTNode | null}  */
@@ -66,6 +67,21 @@ class Tree {
     return node;
   }
 
+  /**
+   * @param {BSTNode | null} root
+   */
+  #findNodeHeight(root) {
+    if (!root) return -1;
+
+    const leftTree = this.#findNodeHeight(root.left);
+    const rightTree = this.#findNodeHeight(root.right);
+
+    const heightOfNode = Math.max(leftTree, rightTree) + 1;
+
+    return heightOfNode;
+  }
+
+  //PUBLIC
   /**
    * @param {number} value
    * @returns {BSTNode | null}  */
@@ -242,7 +258,27 @@ class Tree {
     return resultArray;
   }
 
-  height() {}
+  /**
+   * @param {number} nodeValue
+   * @param {BSTNode | null} root
+   * @returns {number}
+   */
+  height(nodeValue, root = this.root) {
+    if (root) {
+      if (root?.value === nodeValue) {
+        const heightOfNode = this.#findNodeHeight(root);
+        return heightOfNode;
+      }
+
+      if (nodeValue < root.value) {
+        return this.height(nodeValue, root.left);
+      } else {
+        return this.height(nodeValue, root.right);
+      }
+    }
+
+    return -1;
+  }
 
   depth() {}
 
@@ -287,5 +323,6 @@ const myTree = new Tree([14, 98, 56, 68, 63, 18, 60, 73, 49, 97]);
 myTree.prettyPrint(myTree.root);
 // console.log(myTree.levelOrder(myTree.root));
 // console.log(myTree.preOrder(myTree.root));
-console.log(myTree.inOrder(myTree.root));
-console.log(myTree.postOrder(myTree.root));
+// console.log(myTree.inOrder(myTree.root));
+// console.log(myTree.postOrder(myTree.root));
+console.log(myTree.height(73));
