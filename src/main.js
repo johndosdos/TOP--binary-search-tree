@@ -302,7 +302,20 @@ class Tree {
     return -1;
   }
 
-  isBalanced() {}
+  /**
+   * @param {BSTNode | null} root
+   * @returns {boolean}
+   */
+  isBalanced(root = this.root) {
+    if (!root) return false;
+
+    const leftTree = this.isBalanced(root.left);
+    const rightTree = this.isBalanced(root.right);
+
+    if (leftTree !== rightTree) return false;
+
+    return true;
+  }
 
   rebalance() {}
 
@@ -339,11 +352,12 @@ const myTree = new Tree([14, 98, 56, 68, 63, 18, 60, 73, 49, 97]);
 // myTree.insert(51);
 // myTree.insert(50);
 // myTree.insert(57);
-// myTree.insert(52);
+myTree.insert(16);
 myTree.prettyPrint(myTree.root);
 // console.log(myTree.levelOrder(myTree.root));
 // console.log(myTree.preOrder(myTree.root));
 // console.log(myTree.inOrder(myTree.root));
 // console.log(myTree.postOrder(myTree.root));
 // console.log(myTree.height(73));
-console.log(myTree.depth(98));
+// console.log(myTree.depth(98));
+console.log(myTree.isBalanced());
