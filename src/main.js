@@ -68,7 +68,7 @@ class Tree {
   }
 
   /**
-   * @param {BSTNode | null} root
+   * @param {BSTNode | null | undefined} root
    * @returns {number}
    */
   #findNodeHeight(root) {
