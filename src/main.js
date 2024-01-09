@@ -307,14 +307,14 @@ class Tree {
    * @returns {boolean}
    */
   isBalanced(root = this.root) {
-    if (!root) return false;
+    if (!root) return true;
 
-    const leftTree = this.isBalanced(root.left);
-    const rightTree = this.isBalanced(root.right);
+    const leftTree = this.#findNodeHeight(root.left);
+    const rightTree = this.#findNodeHeight(root.right);
 
-    if (leftTree !== rightTree) return false;
+    if (Math.abs(leftTree - rightTree) > 1) return false;
 
-    return true;
+    return this.isBalanced(root.left) && this.isBalanced(root.right);
   }
 
   rebalance() {}
@@ -344,20 +344,20 @@ function generateRandomNumber(size) {
   return Array.from({ length: size }, () => Math.floor(Math.random() * 100));
 }
 
-const randomNumber = generateRandomNumber(10);
-randomNumber;
+const randomNumber = generateRandomNumber(7);
+console.log(randomNumber);
 
-const myTree = new Tree([14, 98, 56, 68, 63, 18, 60, 73, 49, 97]);
-// myTree.insert(40);
-// myTree.insert(51);
-// myTree.insert(50);
-// myTree.insert(57);
-myTree.insert(16);
-myTree.prettyPrint(myTree.root);
+const myTree = new Tree([0, 27, 89, 10, 84, 24, 8]);
+myTree.insert(11);
+myTree.insert(12);
+// myTree.prettyPrint(myTree.root);
 // console.log(myTree.levelOrder(myTree.root));
 // console.log(myTree.preOrder(myTree.root));
 // console.log(myTree.inOrder(myTree.root));
 // console.log(myTree.postOrder(myTree.root));
 // console.log(myTree.height(73));
 // console.log(myTree.depth(98));
+myTree.prettyPrint(myTree.root);
 console.log(myTree.isBalanced());
+// myTree.rebalance();
+// myTree.prettyPrint(myTree.root);
