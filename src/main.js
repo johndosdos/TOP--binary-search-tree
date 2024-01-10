@@ -307,14 +307,27 @@ class Tree {
    * @returns {boolean}
    */
   isBalanced(root = this.root) {
-    if (!root) return true;
+    /**
+     * Performs a depth-first search on the given root node.
+     *
+     * @param {object} root - The root node of the tree.
+     * @return {array} An array containing a boolean value indicating if the tree is balanced,
+     *                 and the height of the tree.
+     */
+    function dfs(root) {
+      if (!root) return [true, 0];
 
-    const leftTree = this.#findNodeHeight(root.left);
-    const rightTree = this.#findNodeHeight(root.right);
+      const leftTree = dfs(root.left);
+      const rightTree = dfs(root.right);
 
-    if (Math.abs(leftTree - rightTree) > 1) return false;
+      const balanceStatus =
+        leftTree[0] &&
+        rightTree[0] &&
+        Math.abs(leftTree[1] - rightTree[1]) <= 1;
 
-    return this.isBalanced(root.left) && this.isBalanced(root.right);
+      return [balanceStatus, 1 + Math.max(leftTree[1], rightTree[1])];
+    }
+    return dfs(root)[0];
   }
 
   rebalance() {}
@@ -340,14 +353,17 @@ class Tree {
   }
 }
 
+/**
+ * @param {number} size
+ */
 function generateRandomNumber(size) {
   return Array.from({ length: size }, () => Math.floor(Math.random() * 100));
 }
 
-const randomNumber = generateRandomNumber(7);
-console.log(randomNumber);
+const randomNumber = generateRandomNumber(3);
+randomNumber;
 
-const myTree = new Tree([0, 27, 89, 10, 84, 24, 8]);
+const myTree = new Tree([24, 62, 79]);
 myTree.insert(11);
 myTree.insert(12);
 // myTree.prettyPrint(myTree.root);
