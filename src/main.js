@@ -39,16 +39,17 @@ class Tree {
    * @param {number} start
    * @param {number} end
    * @returns {BSTNode | null} */
-  #buildSubTree(array, start = 0, end = array.length - 1) {
-    if (start > end) return null;
+  #buildSubTree(array) {
+    if (!this.root) {
+      const element = array.pop();
+      this.root = this.insert(element);
+    }
+    while (array.length) {
+      const element = array.pop();
+      this.insert(element);
+    }
 
-    const rootNodeIndex = Math.floor((start + end) / 2);
-    const rootNode = new BSTNode(array[rootNodeIndex]);
-
-    rootNode.left = this.#buildSubTree(array, start, rootNodeIndex - 1);
-    rootNode.right = this.#buildSubTree(array, rootNodeIndex + 1, end);
-
-    return rootNode;
+    return this.root;
   }
 
   /**
