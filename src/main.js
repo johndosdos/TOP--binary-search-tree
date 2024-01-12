@@ -89,24 +89,18 @@ class Tree {
    * @param {number} value
    * @returns {BSTNode | null}  */
   insert(value, root = this.root) {
-    if (root && root.value) {
-      if (value === root.value) {
-        console.log(`\n\nINSERT: Failed! Duplicate value found.\n\n`);
-        return null;
-      } else if (value < root.value) {
-        root.left = this.insert(value, root.left);
-        return root;
-      } else if (value > root.value) {
-        root.right = this.insert(value, root.right);
-        return root;
-      }
+    if (root === null) {
+      const node = new BSTNode(value);
+      root = node;
+      return root;
+    } else if (value < root.value) {
+      root.left = this.insert(value, root.left);
+      return root;
+    } else if (value > root.value) {
+      root.right = this.insert(value, root.right);
+      return root;
     }
 
-    const node = new BSTNode(value);
-    if (node?.value) {
-      root = node;
-    }
-    console.log(`\n\nINSERT: Success!\n\n`);
     return root;
   }
 
@@ -332,8 +326,6 @@ class Tree {
     return dfs(root)[0];
   }
 
-  rebalance() {}
-
   /**
    * @param {BSTNode | null} node
    */
@@ -367,7 +359,7 @@ randomNumber;
 
 const myTree = new Tree([24, 62, 79]);
 myTree.insert(11);
-myTree.insert(12);
+// myTree.insert(12);
 // myTree.prettyPrint(myTree.root);
 // console.log(myTree.levelOrder(myTree.root));
 // console.log(myTree.preOrder(myTree.root));
