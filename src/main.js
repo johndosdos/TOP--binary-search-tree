@@ -60,6 +60,9 @@ class Tree {
     return node;
   }
 
+  /**
+   * @param {BSTNode | null} root
+   */
   #updateSubtreeHeight(root) {
     if (root) {
       root.height =
