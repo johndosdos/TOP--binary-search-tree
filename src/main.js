@@ -7,10 +7,10 @@ class BSTNode {
   constructor(value) {
     /** @type {value} */
     this.value = value;
-    /** @type {BSTNode | null} */
-    this.left = null;
-    /** @type {BSTNode | null} */
-    this.right = null;
+    /** @type {BSTNode | undefined} */
+    this.left = undefined;
+    /** @type {BSTNode | undefined} */
+    this.right = undefined;
     /** @type {number} */
     this.height = 0;
   }
@@ -25,7 +25,7 @@ class Tree {
   //PRIVATE
   /**
    * @param {Array<number>} array
-   * @returns {BSTNode | null}  */
+   * @returns {BSTNode | undefined}  */
   #buildTree(array) {
     const uniqueArray = [...new Set(array)];
 
@@ -35,7 +35,7 @@ class Tree {
 
   /**
    * @param {Array<number>} array
-   * @returns {BSTNode | null} */
+   * @returns {BSTNode | undefined} */
   #buildSubTree(array) {
     if (!this.root) {
       const element = array.pop();
@@ -61,7 +61,7 @@ class Tree {
   }
 
   /**
-   * @param {BSTNode | null} root
+   * @param {BSTNode | undefined} root
    */
   #updateSubtreeHeight(root) {
     if (root) {
@@ -71,7 +71,7 @@ class Tree {
   }
 
   /**
-   * @param {BSTNode | null} root
+   * @param {BSTNode | undefined} root
    */
   #checkSubtreeBalance(root) {
     const balance = this.isBalanced(root);
@@ -80,9 +80,8 @@ class Tree {
   //PUBLIC
   /**
    * @param {number | undefined} value
-   * @returns {BSTNode | null}  */
+   * @returns {BSTNode | undefined}  */
   insert(value, root = this.root) {
-    // conditional checks
     if (value) {
       if (!root) {
         root = new BSTNode(value);
@@ -94,17 +93,17 @@ class Tree {
       }
     }
 
-    // update height of the tree
     this.#updateSubtreeHeight(root);
+
     // this.#checkSubtreeBalance(root);
 
-    return root;
+    return;
   }
 
   /**
    * @param {number} value
-   * @param {BSTNode | null} root
-   * @returns {BSTNode | null} */
+   * @param {BSTNode | undefined} root
+   * @returns {BSTNode | undefined} */
   delete(value, root = this.root) {
     if (root && root.value) {
       //
@@ -139,7 +138,7 @@ class Tree {
       //Case 3: node has no children
       if (value === root.value) {
         console.log(`\n\nDELETE: Success!\n\n`);
-        return null;
+        return undefined;
       } else if (value < root.value) {
         root.left = this.delete(value, root.left);
         return root;
@@ -155,7 +154,7 @@ class Tree {
 
   /**
    * @param {number} value
-   * @returns {BSTNode | null}   */
+   * @returns {BSTNode | undefined}   */
   find(value, root = this.root) {
     const node = root;
 
@@ -169,11 +168,11 @@ class Tree {
       }
     }
 
-    return null;
+    return undefined;
   }
 
   /**
-   * @param {BSTNode | null} node
+   * @param {BSTNode | undefined} node
    * @returns {Array<number | undefined>}
    */
   levelOrder(node) {
@@ -196,7 +195,7 @@ class Tree {
   }
 
   /**
-   * @param {BSTNode | null | undefined} node
+   * @param {BSTNode | undefined} node
    * @param {Array<number | undefined>} resultArray
    * @returns {Array<number | undefined>}
    */
@@ -215,7 +214,7 @@ class Tree {
   }
 
   /**
-   * @param {BSTNode | null | undefined} node
+   * @param {BSTNode | undefined} node
    * @param {Array<number | undefined>} resultArray
    * @returns {Array<number | undefined>}
    */
@@ -234,7 +233,7 @@ class Tree {
   }
 
   /**
-   * @param {BSTNode | null | undefined} node
+   * @param {BSTNode | undefined} node
    * @param {Array<number | undefined>} resultArray
    * @returns {Array<number | undefined>}
    */
@@ -254,7 +253,7 @@ class Tree {
 
   /**
    * @param {number} nodeValue
-   * @param {BSTNode | null} root
+   * @param {BSTNode | undefined} root
    * @returns {number}
    */
   height(nodeValue, root = this.root) {
@@ -275,7 +274,7 @@ class Tree {
 
   /**
    * @param {number} nodeValue
-   * @param {BSTNode | null} root
+   * @param {BSTNode | undefined} root
    * @returns {number}
    */
   depth(nodeValue, root = this.root, depthOfNode = 0) {
@@ -295,41 +294,21 @@ class Tree {
   }
 
   /**
-   * @param {BSTNode | null} root
+   * @param {BSTNode | undefined} root
    * @returns {boolean}
    */
   isBalanced(root = this.root) {
-    /**
-     * Performs a depth-first search on the given root node.
-     *
-     * @param {object} root - The root node of the tree.
-     * @return {array} An array containing a boolean value indicating if the tree is balanced,
-     *                 and the height of the tree.
-     */
-    function dfs(root) {
-      if (!root) return [true, 0];
-
-      const leftTree = dfs(root.left);
-      const rightTree = dfs(root.right);
-
-      const balanceStatus =
-        leftTree[0] &&
-        rightTree[0] &&
-        Math.abs(leftTree[1] - rightTree[1]) <= 1;
-
-      return [balanceStatus, 1 + Math.max(leftTree[1], rightTree[1])];
-    }
-    return dfs(root)[0];
+    return true;
   }
 
   /**
-   * @param {BSTNode | null} node
+   * @param {BSTNode | undefined} node
    */
   prettyPrint(node, prefix = "", isLeft = true) {
-    if (node === null) {
+    if (node === undefined) {
       return;
     }
-    if (node.right !== null) {
+    if (node.right !== undefined) {
       this.prettyPrint(
         node.right,
         `${prefix}${isLeft ? "│   " : "    "}`,
@@ -337,7 +316,7 @@ class Tree {
       );
     }
     console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
-    if (node.left !== null) {
+    if (node.left !== undefined) {
       this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
   }
@@ -354,5 +333,6 @@ const randomNumber = generateRandomNumber(3);
 randomNumber;
 
 const myTree = new Tree([24, 62, 79]);
+// myTree.insert(69);
 myTree.prettyPrint(myTree.root);
 console.log(myTree.height(24));
