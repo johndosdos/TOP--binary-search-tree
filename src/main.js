@@ -80,19 +80,21 @@ class Tree {
 
   //PUBLIC
   /**
-   * @param {number} value
+   * @param {number | undefined} value
    * @returns {BSTNode | null}  */
   insert(value, root = this.root) {
-    if (root === null) {
-      const node = new BSTNode(value);
-      root = node;
-      return root;
-    } else if (value < root.value) {
-      root.left = this.insert(value, root.left);
-      return root;
-    } else if (value > root.value) {
-      root.right = this.insert(value, root.right);
-      return root;
+    // conditional checks
+    if (value) {
+      if (!root) {
+        root = new BSTNode(value);
+        return root;
+      } else if (value < root.value) {
+        root.left = this.insert(value, root.left);
+      } else if (value > root.value) {
+        root.right = this.insert(value, root.right);
+      }
+    }
+
     }
 
     return root;
