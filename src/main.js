@@ -27,14 +27,7 @@ class Tree {
    * @param {Array<number>} array
    * @returns {BSTNode | null}  */
   #buildTree(array) {
-    /**
-     * @param {number} a
-     * @param {number} b
-     * @returns {number}
-     */
-    const compareFunction = (a, b) => a - b;
-    const sortedArray = array.sort(compareFunction);
-    const uniqueArray = [...new Set(sortedArray)];
+    const uniqueArray = [...new Set(array)];
 
     const rootNode = this.#buildSubTree(uniqueArray);
 
