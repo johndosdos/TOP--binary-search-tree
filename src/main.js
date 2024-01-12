@@ -30,14 +30,11 @@ class Tree {
     const uniqueArray = [...new Set(array)];
 
     const rootNode = this.#buildSubTree(uniqueArray);
-
     return rootNode;
   }
 
   /**
    * @param {Array<number>} array
-   * @param {number} start
-   * @param {number} end
    * @returns {BSTNode | null} */
   #buildSubTree(array) {
     if (!this.root) {
@@ -61,21 +58,6 @@ class Tree {
       return this.#findSuccessorNode(node.left);
     }
     return node;
-  }
-
-  /**
-   * @param {BSTNode | null | undefined} root
-   * @returns {number}
-   */
-  #findNodeHeight(root) {
-    if (!root) return -1;
-
-    const leftTree = this.#findNodeHeight(root.left);
-    const rightTree = this.#findNodeHeight(root.right);
-
-    const heightOfNode = Math.max(leftTree, rightTree) + 1;
-
-    return heightOfNode;
   }
 
   //PUBLIC
@@ -357,16 +339,5 @@ const randomNumber = generateRandomNumber(3);
 randomNumber;
 
 const myTree = new Tree([24, 62, 79]);
-myTree.insert(11);
-// myTree.insert(12);
-// myTree.prettyPrint(myTree.root);
-// console.log(myTree.levelOrder(myTree.root));
-// console.log(myTree.preOrder(myTree.root));
-// console.log(myTree.inOrder(myTree.root));
-// console.log(myTree.postOrder(myTree.root));
-// console.log(myTree.height(73));
-// console.log(myTree.depth(98));
 myTree.prettyPrint(myTree.root);
-console.log(myTree.isBalanced());
-// myTree.rebalance();
-// myTree.prettyPrint(myTree.root);
+console.log(myTree.height(24));
