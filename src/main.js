@@ -263,8 +263,7 @@ class Tree {
   height(nodeValue, root = this.root) {
     if (root) {
       if (root?.value === nodeValue) {
-        const heightOfNode = this.#findNodeHeight(root);
-        return heightOfNode;
+        return root.height;
       }
 
       if (nodeValue < root.value) {
