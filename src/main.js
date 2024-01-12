@@ -60,6 +60,13 @@ class Tree {
     return node;
   }
 
+  #updateSubtreeHeight(root) {
+    if (root) {
+      root.height =
+        Math.max(root?.left?.height ?? -1, root?.right?.height ?? -1) + 1;
+    }
+  }
+
   //PUBLIC
   /**
    * @param {number | undefined} value
@@ -78,10 +85,7 @@ class Tree {
     }
 
     // update height of the tree
-    if (root) {
-      root.height =
-        Math.max(root?.left?.height ?? -1, root?.right?.height ?? -1) + 1;
-    }
+    this.#updateSubtreeHeight(root);
 
     return root;
   }
