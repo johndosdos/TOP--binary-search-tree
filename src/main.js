@@ -70,6 +70,13 @@ class Tree {
     }
   }
 
+  /**
+   * @param {BSTNode | null} root
+   */
+  #checkSubtreeBalance(root) {
+    const balance = this.isBalanced(root);
+  }
+
   //PUBLIC
   /**
    * @param {number | undefined} value
@@ -89,6 +96,7 @@ class Tree {
 
     // update height of the tree
     this.#updateSubtreeHeight(root);
+    // this.#checkSubtreeBalance(root);
 
     return root;
   }
