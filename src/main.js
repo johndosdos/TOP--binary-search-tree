@@ -95,6 +95,10 @@ class Tree {
       }
     }
 
+    // update height of the tree
+    if (root) {
+      root.height =
+        Math.max(root?.left?.height ?? -1, root?.right?.height ?? -1) + 1;
     }
 
     return root;
