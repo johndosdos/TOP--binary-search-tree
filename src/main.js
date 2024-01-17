@@ -72,7 +72,7 @@ class Tree {
   /**
    * @param {BSTNode | undefined} root
    */
-  #checkSubtreeBalance(root) {
+  #updateSubtreeBalance(root) {
     const balance = this.isBalanced(root);
   }
 
@@ -102,7 +102,7 @@ class Tree {
 
     this.#updateSubtreeHeight(root);
 
-    this.#checkSubtreeBalance(root);
+    this.#updateSubtreeBalance(root);
 
     return root;
   }
@@ -357,4 +357,4 @@ randomNumber;
 const myTree = new Tree([24, 62, 79]);
 // myTree.insert(69);
 myTree.prettyPrint(myTree.root);
-console.log(myTree.height(24));
+// console.log(myTree.height(24));
