@@ -78,25 +78,33 @@ class Tree {
 
   //PUBLIC
   /**
-   * @param {number | undefined} value
+   * @param {number} value
    * @returns {BSTNode | undefined}  */
   insert(value, root = this.root) {
-    if (value) {
-      if (!root) {
-        root = new BSTNode(value);
-        return root;
-      } else if (value < root.value) {
+    if (!root) {
+      root = new BSTNode(value);
+      return root;
+    } else if (value < root.value) {
+      if (!root.left) {
+        root.left = new BSTNode(value);
+      } else {
         root.left = this.insert(value, root.left);
-      } else if (value > root.value) {
+      }
+    } else if (value > root.value) {
+      if (!root.right) {
+        root.right = new BSTNode(value);
+      } else {
         root.right = this.insert(value, root.right);
       }
+    } else {
+      return root;
     }
 
     this.#updateSubtreeHeight(root);
 
-    // this.#checkSubtreeBalance(root);
+    this.#checkSubtreeBalance(root);
 
-    return;
+    return root;
   }
 
   /**
