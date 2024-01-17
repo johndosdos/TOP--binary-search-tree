@@ -305,7 +305,22 @@ class Tree {
    * @returns {boolean}
    */
   isBalanced(root = this.root) {
-    return true;
+    //1. check if the absolute difference of the subtree heights is <= 1
+    if (root && root.left && root.right) {
+      const subtreeHeightDiff = Math.abs(root.left.height - root.right.height);
+
+      if (subtreeHeightDiff <= 1) {
+        return true;
+      }
+    }
+
+    //2. check if left subtree is balanced
+    if (this.isBalanced(root?.left)) return true;
+
+    //3. check if right subtree is balanced
+    if (this.isBalanced(root?.right)) return true;
+
+    return false;
   }
 
   /**
