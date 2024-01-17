@@ -50,8 +50,8 @@ class Tree {
   }
 
   /**
-   * @param {BSTNode} node
    * @returns {BSTNode}
+   * @param {BSTNode} node
    */
   #findSuccessorNode(node) {
     if (node.left) {
@@ -64,9 +64,8 @@ class Tree {
    * @param {BSTNode | undefined} root
    */
   #updateSubtreeHeight(root) {
-    if (root) {
-      root.height =
-        Math.max(root?.left?.height ?? -1, root?.right?.height ?? -1) + 1;
+    if (root && root.left && root.right) {
+      root.height = Math.max(root?.left?.height, root?.right?.height) + 1;
     }
   }
 
