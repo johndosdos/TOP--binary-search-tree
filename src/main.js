@@ -39,11 +39,11 @@ class Tree {
   #buildSubTree(array) {
     if (!this.root) {
       const element = array.pop();
-      this.root = this.insert(element);
+      if (element) this.root = this.insert(element);
     }
     while (array.length) {
       const element = array.pop();
-      this.insert(element);
+      if (element) this.insert(element);
     }
 
     return this.root;
